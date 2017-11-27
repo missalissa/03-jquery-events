@@ -21,7 +21,7 @@ articleView.populateFilters = function() {
             // if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
             //     $('#author-filter').append(optionTag);
             // }
-            if ($(`#author-filter option[value=${authorName}]`).length === 0) { // new
+            if ($(`#author-filter option[value='${authorName}']`).length === 0) { // new
                 $(`#author-filter`).append(optionTag);
             }
 
@@ -36,7 +36,7 @@ articleView.populateFilters = function() {
             // if ($('#category-filter option[value="' + category + '"]').length === 0) {
             //     $('#category-filter').append(optionTag);
             // }
-            if ($(`#category-filter option[value=${category}]`).length === 0) {
+            if ($(`#category-filter option[value='${category}']`).length === 0) {
                 $(`#category-filter`).append(optionTag);
             }
         }
@@ -88,5 +88,5 @@ articleView.setTeasers = function() {
 
 // TODO: Call all of the above functions, once we are sure the DOM is ready.
 $(document).ready(function() {
-
+    articleView.populateFilters();
 });
