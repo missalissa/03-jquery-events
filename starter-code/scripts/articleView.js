@@ -14,11 +14,15 @@ articleView.populateFilters = function() {
             authorName = $(this).attr('data-author');
 
             // TODO: Refactor this concatenation using a template literal.
-            optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
-            
+            // optionTag = '<option value="' + authorName + '">' + authorName + '</option>'; // old
+            optionTag = `<option value='${authorName}'>${authorName}</option>`; // new
+            // const newOption = `<option value='${color}'>${color}</option>`; // example
             // TODO: Refactor this concatenation using a template literal.
-            if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
-                $('#author-filter').append(optionTag);
+            // if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
+            //     $('#author-filter').append(optionTag);
+            // }
+            if ($(`#author-filter option[value=${authorName}]`).length === 0) { // new
+                $(`#author-filter`).append(optionTag);
             }
 
             // REVIEW: Similar to the above. Note that we avoid duplicates!
@@ -26,10 +30,14 @@ articleView.populateFilters = function() {
             category = $(this).attr('data-category');
 
             // TODO: Refactor this concatenation using a template literal.
-            optionTag = '<option value="' + category + '">' + category + '</option>';
+            // optionTag = '<option value="' + category + '">' + category + '</option>';
+            optionTag = `<option value='${category}'>${category}</option>`; // new
 
-            if ($('#category-filter option[value="' + category + '"]').length === 0) {
-                $('#category-filter').append(optionTag);
+            // if ($('#category-filter option[value="' + category + '"]').length === 0) {
+            //     $('#category-filter').append(optionTag);
+            // }
+            if ($(`#category-filter option[value=${category}]`).length === 0) {
+                $(`#category-filter`).append(optionTag);
             }
         }
     });
