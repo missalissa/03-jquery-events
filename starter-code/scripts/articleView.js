@@ -45,7 +45,6 @@ articleView.populateFilters = function() {
 
 articleView.handleAuthorFilter = function() {
     $('#author-filter').on('change', function() {
-        const selectedAuthorName = $(this).attr('data-author');
     // REVIEW: Inside this function, "this" is the element that triggered the event handler function we are defining. "$(this)" is using jQuery to select that element (analogous to event.target that we have seen before), so we can chain jQuery methods onto it.
         if ($(this).val()) {
             // TODO: If the <select> menu was changed to an option that has a value, we first need to hide all the articles, and then show just the ones that match for the author that was selected.
@@ -55,10 +54,12 @@ articleView.handleAuthorFilter = function() {
 
             $(`article[data-author='${$(this).val()}']`).fadeIn();
         } else {
+            $('article').fadeIn();
+            $('article').not('.template').hide();
             // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
 
         }
-        $('#category-filter').val('');
+        $('#category-filter').val(''); // what's this
     });
 };
 
@@ -67,7 +68,17 @@ articleView.handleCategoryFilter = function() {
     // When an option with a value is selected, hide all the articles, then reveal the matches.
     // When the blank (default) option is selected, show all the articles, except for the template.
     // Be sure to reset the #author-filter while you are at it!
-
+    $('#category-filter').on('change', function() {
+       
+        if ($(this).val()) {
+            $('article').hide();
+            $(`article[data-category='${$(this).val()}']`).fadeIn();
+        } else {
+            $('article').fadeIn();
+            $('article').not('.template').hide();
+        }
+        $('#author-filter').val(''); // what's this
+    });
 };
 
 articleView.handleMainNav = function() {
@@ -91,4 +102,7 @@ articleView.setTeasers = function() {
 $(document).ready(function() {
     articleView.populateFilters();
     articleView.handleAuthorFilter();
+    articleView.handleCategoryFilter();
+    articleView.handleMainNav();
+    articleView.setTeasers();
 });
